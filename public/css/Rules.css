@@ -1,0 +1,46 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "Oswald", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+}
+
+.g {
+    position: fixed;
+    top: 90px;
+    left: 870px;
+}
+
+footer {
+    color: white;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    height: 21px;
+}
+
+.pReglas,
+li {
+    text-align: justify;
+}
+
+.contenedorLateral {
+    position: absolute;
+    top: 20px;
+    right: 390px;
+    width: 61px;
+    color: white;
+}
+
+.cols {
+    display: flex;
+}
+
+.contenedor,
+.contenedorLateral {
+    display: inline-block;
+    height: 100%;
+}

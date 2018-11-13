@@ -1,0 +1,42 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "Oswald", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+footer {
+    color: white;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    height: 21px;
+}
+
+img {
+    float: initial;
+}
+
+.h {
+    background-color: rgb(43, 43, 43)
+}
+
+.colInfo {
+    width: 33%;
+    background-color: rgb(0, 7, 31);
+    margin: 1% 1%;
+}
+
+.col {
+    display: flex;
+}
+
+.colInfo,
+.colImages {
+    display: inline-block;
+    height: 100%;
+}
