@@ -84,8 +84,8 @@ function dibujarMatriz() {
 
 function nuevoJuego() { //Función del botón nuevo juego
     document.addEventListener("keydown", movimiento);
-    lblContBlancas = null;
-    lblContNegras = null;
+    lblContBlancas.value = null;
+    lblContNegras.value = null;
     x = 0;
     y = 0;
     turno = true; //True para turno negro
@@ -154,9 +154,9 @@ function colocarFicha() { //Verifica que se pueda colocar la ficha en la posici�
                 dibujarMatriz(); //Dibuja la matriz según los calores
                 jugadaPosible();
             } else
-            alert(mensajesJ.movIncorrecto);
+                alert(mensajesJ.movIncorrecto);
         } else
-        alert(mensajesJ.movIncorrecto);
+            alert(mensajesJ.movIncorrecto);
     } else { //turno de fichas blancas
         if (matriz[y / DIMENSION][x / DIMENSION] == 'x') {
             if (movimientoValido('FB', 'FN')) {
@@ -170,41 +170,49 @@ function colocarFicha() { //Verifica que se pueda colocar la ficha en la posici�
             } else
                 alert(mensajesJ.movIncorrecto);
         } else
-        alert(mensajesJ.movIncorrecto);
+            alert(mensajesJ.movIncorrecto);
     }
 };
 
 function jugadaPosible() {
     let posibleJugada = 0;
-    let fichasBlancas = 0;
-    let fichasNegras = 0;
+    let fBlancas = 0;
+    let fNegras = 0;
     for (let row = 0; row < matriz.length; row++) {
         for (let col = 0; col < matriz.length; col++) {
             if (matriz[row][col] == 'x')
                 posibleJugada++;
             else
-                matriz[row][col] == 'FN' ? fichasNegras++ : fichasBlancas++;
+                matriz[row][col] == 'FN' ? fNegras++ : fBlancas++;
         }
     }
     if (posibleJugada == 0) {
         alert(mensajesJ.terminado);
-        if (fichasBlancas != fichasNegras)
-            alert((fichasBlancas < fichasNegras ? mensajesJ.negras : mensajesJ.blancas));
-        else
+        if (fBlancas != fNegras) {
+            if (fBlancas < fNegras) {
+                alert(mensajesJ.negras);
+                guardarScore(fNegras);
+            } else {
+                alert(mensajesJ.blancas);
+                guardarScore(fBlancas);
+            }
+        } else
             alert(mensajesJ.empate);
         location.reload();
     } else {
-        if (fichasBlancas == 0) {
+        if (fBlancas == 0) {
             alert(mensajesJ.negras);
+            guardarScore(fNegras);
             location.reload();
-        } else if (fichasNegras == 0) {
+        } else if (fNegras == 0) {
             alert(mensajesJ.blancas);
+            guardarScore(fBlancas);
             location.reload();
         }
 
     }
-    lblContNegras.value = fichasNegras;
-    lblContBlancas.value = fichasBlancas;
+    lblContNegras.value = fNegras;
+    lblContBlancas.value = fBlancas;
 
 };
 
@@ -399,7 +407,7 @@ function pasar() {
     dibujar();
     dibujarMatriz();
     turnos();
-}
+};
 
 function finJuego() {
     let fBlancas = 0;
@@ -414,18 +422,28 @@ function finJuego() {
     }
     if (fNegras < fBlancas) {
         alert(mensajesJ.blancas);
+        guardarScore(fBlancas);
     } else if (fBlancas < fNegras) {
         alert(mensajesJ.negras);
+        guardarScore(fNegras);
+
     } else {
         alert(mensajesJ.empate);
     }
-   
-    if(fNegras < fBlancas || fBlancas < fNegras){
-        var confirmacion = confirm("Desea guardar los datos");
-            if(confirmacion){
-                alert("Aceptar");
-            }else{
-                alert("Cancelar");
-            }
+}
+
+function guardarScore(puntajeGanador) {
+    var confirmacion = confirm("¿Desea guardar su puntuación?");
+    if (confirmacion) {
+        location.href = 'perfil.html';
+    } else {
+        location.reload();
+    }
+}
+class othelloapp {
+    constructor() {}
+
+    puntajeGanador() {
+        return puntGanador;
     }
 }

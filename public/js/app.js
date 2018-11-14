@@ -1,3 +1,6 @@
+import othelloapp from "./othelloapp";
+var punteo = othelloapp.puntajeGanador;
+
 var btnSesion = document.getElementById('btnSesion');
 var btnLogout = document.getElementById('btnLogout');
 var txtDisplayName = document.getElementById('txtDisplayName');
@@ -16,7 +19,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 function mostrarInformacionPerfil(uid) {
-    refDB.child(uid).once('value', function(data) { 
+    refDB.child(uid).once('value', function(data) {
         txtDisplayName.value = data.val().displayName;
         txtEmail.value = data.val().email;
     });
@@ -29,20 +32,25 @@ btnSesion.addEventListener('click', function() {
     // var provider = new firebase.auth.FacebookAuthProvider();
     // provider.addScope('public_profile');
     firebase.auth().signInWithPopup(provider).then(function(datos) {
+        var d = new Date();
+        var mes = parseInt(d.getMonth()) + 1;
+        var n = d.getFullYear() + '-' + mes + '-' + d.getDate();
         var usuario = {
             displayName: datos.user.displayName,
             email: datos.user.email,
-            uid: datos.user.uid
+            uid: datos.user.uid,
+
         };
-        refDB.child(usuario.uid).set(usuario);
+        refDB.child(usuario.uid).update(usuario);
         txtDisplayName.value = usuario.displayName;
         txtEmail.value = usuario.email;
+        refDB.child(ususario.uid).child(n + '(' + punteo + ')').update({ score: { punteo: punteo, fecha: d } })
     });
 });
 
 btnLogout.addEventListener('click', function() {
     cerrarSesion();
-    firebase.auth().signOut().then(function () {
+    firebase.auth().signOut().then(function() {
         alert('Cerraste sesión');
     });
 });
@@ -70,6 +78,6 @@ function abrirSesion() {
 function cerrarSesion() {
     btnSesion.style.display = 'block';
     btnLogout.style.display = 'none';
-    txtDisplayName.value=null;
-    txtEmail.value=null;    
+    txtDisplayName.value = '';
+    txtEmail.value = '';
 }
