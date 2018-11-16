@@ -1,6 +1,3 @@
-import othelloapp from "./othelloapp";
-var punteo = othelloapp.puntajeGanador;
-
 var btnSesion = document.getElementById('btnSesion');
 var btnLogout = document.getElementById('btnLogout');
 var txtDisplayName = document.getElementById('txtDisplayName');

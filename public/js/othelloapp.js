@@ -1,13 +1,15 @@
+var refDB = firebase.database().ref('usuario');
 var canvas = document.getElementById('tablero');
+var lapiz = canvas.getContext('2d');
 var lblContNegras = document.getElementById('contNegras');
 var lblContBlancas = document.getElementById('contBlancas');
 var btnGameOver = document.getElementById('btnGameOver').style.display = 'none';
-var lapiz = canvas.getContext('2d');
 var matriz = new Array(8);
+const DIMENSION = 60;
+var puntGanador = 0;
+var turno = false;
 const ESPX = 8;
 const ESPY = 9;
-const DIMENSION = 60;
-var turno = false;
 var x, y;
 
 var tablero = {
@@ -34,8 +36,7 @@ var mensajesJ = { //Mensajes del juego
     blancas: '¡Las blancas ganan!',
     negras: '¡Las negras ganan!',
     empate: '¡Es un empate!',
-    movIncorrecto: 'Movimiento inválido\nVuelve a intentarlo!'
-
+    movIncorrecto: 'Movimiento inválido\n¡Vuelve a intentarlo!'
 }
 
 tablero.imagen = new Image();
@@ -80,7 +81,7 @@ function dibujarMatriz() {
                 lapiz.drawImage(FichaBlanca.imagen, (DIMENSION * col) + ESPX, (DIMENSION * row) + ESPY);
         }
     }
-};
+}
 
 function nuevoJuego() { //Función del botón nuevo juego
     document.addEventListener("keydown", movimiento);
@@ -94,8 +95,8 @@ function nuevoJuego() { //Función del botón nuevo juego
     dibujar(); //Dibuja el tablero
     dibujarMatriz(); //Dibuja la matriz
     turnos(); //Hace que empiece el juego con la ficha del turno correspondiente
-    document.getElementById('btnGameOver').style.display = 'block';
-};
+    document.getElementById('btnGameOver').style.display = 'block'
+}
 
 function movimiento(evento) {
     switch (evento.keyCode) {
@@ -133,14 +134,14 @@ function movimiento(evento) {
             dibujarMatriz();
             turnos();
     }
-};
+}
 
 function turnos() { //Es llamado al presionar enter
     if (turno) //Si es turno de negras..
         lapiz.drawImage(FichaNegra.imagen, x + ESPX, y + ESPY); //Dibujando la ficha negra esquina sup. derecha
     else //turno blancas
         lapiz.drawImage(FichaBlanca.imagen, x + ESPX, y + ESPY); //Dibujando la ficha blanca esquina sup. derecha
-};
+}
 
 function colocarFicha() { //Verifica que se pueda colocar la ficha en la posición indicada
     if (turno) { //turno de fichas negras
@@ -153,10 +154,12 @@ function colocarFicha() { //Verifica que se pueda colocar la ficha en la posici�
                 dibujar(); //Dibuja el tablero
                 dibujarMatriz(); //Dibuja la matriz según los calores
                 jugadaPosible();
-            } else
+            } else {
                 alert(mensajesJ.movIncorrecto);
-        } else
+            }
+        } else {
             alert(mensajesJ.movIncorrecto);
+        }
     } else { //turno de fichas blancas
         if (matriz[y / DIMENSION][x / DIMENSION] == 'x') {
             if (movimientoValido('FB', 'FN')) {
@@ -167,12 +170,14 @@ function colocarFicha() { //Verifica que se pueda colocar la ficha en la posici�
                 dibujar();
                 dibujarMatriz();
                 jugadaPosible();
-            } else
+            } else {
                 alert(mensajesJ.movIncorrecto);
-        } else
+            }
+        } else {
             alert(mensajesJ.movIncorrecto);
+        }
     }
-};
+}
 
 function jugadaPosible() {
     let posibleJugada = 0;
@@ -196,9 +201,10 @@ function jugadaPosible() {
                 alert(mensajesJ.blancas);
                 guardarScore(fBlancas);
             }
-        } else
+        } else {
             alert(mensajesJ.empate);
-        location.reload();
+            setTimeout(location.reload(), 1500);
+        }
     } else {
         if (fBlancas == 0) {
             alert(mensajesJ.negras);
@@ -207,14 +213,11 @@ function jugadaPosible() {
         } else if (fNegras == 0) {
             alert(mensajesJ.blancas);
             guardarScore(fBlancas);
-            location.reload();
         }
-
     }
     lblContNegras.value = fNegras;
     lblContBlancas.value = fBlancas;
-
-};
+}
 
 function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas principales (quienes llaman al método)
     let col = x / DIMENSION;
@@ -238,8 +241,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true; //Es posible comer
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -260,8 +264,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -282,8 +287,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -304,8 +310,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -326,8 +333,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -348,8 +356,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -370,8 +379,9 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
@@ -392,13 +402,14 @@ function movimientoValido(fPrincipal, fSecundaria) { //fPrincipal: Fichas princi
                     }
                     comidaPosible = true;
                     break;
-                } else
+                } else {
                     break;
+                }
             }
         }
     }
     return comidaPosible;
-};
+}
 
 function pasar() {
     x = 0;
@@ -407,7 +418,7 @@ function pasar() {
     dibujar();
     dibujarMatriz();
     turnos();
-};
+}
 
 function finJuego() {
     let fBlancas = 0;
@@ -426,24 +437,44 @@ function finJuego() {
     } else if (fBlancas < fNegras) {
         alert(mensajesJ.negras);
         guardarScore(fNegras);
-
     } else {
         alert(mensajesJ.empate);
+        setTimeout(location.reload(), 1500);
     }
 }
 
 function guardarScore(puntajeGanador) {
-    var confirmacion = confirm("¿Desea guardar su puntuación?");
+    let confirmacion = confirm("¿Desea guardar su puntuación?");
+    puntGanador = puntajeGanador;
     if (confirmacion) {
-        location.href = 'perfil.html';
+        setTimeout(iniciar(puntajeGanador), 2000);
     } else {
-        location.reload();
+        setTimeout(location.reload(), 1500);
     }
 }
-class othelloapp {
-    constructor() {}
 
-    puntajeGanador() {
-        return puntGanador;
-    }
+function iniciar(punteo) {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth().signInWithPopup(provider).then(function(datos) {
+        let d = new Date();
+        let mes = parseInt(d.getMonth()) + 1;
+        let n = d.getFullYear() + '-' + mes + '-' + d.getDate();
+        var usuario = {
+            displayName: datos.user.displayName,
+            email: datos.user.email,
+            uid: datos.user.uid,
+        };
+
+        refDB.child(usuario.uid).update(usuario);
+        refDB.child(usuario.uid).child(n + '(' + punteo + ')').update({ score: { puntuacion: punteo, fecha: n } });
+    });
+    setTimeout(cerrarSesion(), 1000);
+}
+
+function cerrarSesion() {
+    firebase.auth().signOut().then(function() {
+        console.log('Se cerró la sesión correctamente.');
+    });
+    // setTimeout(location.reload(), 1500);
 }

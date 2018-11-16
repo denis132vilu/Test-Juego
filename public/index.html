@@ -43,7 +43,7 @@
                 <a title="Pasar" onclick="pasar()"></a>
             </div>
             <div>
-                <a title="Fin del Juego" onclick="finJuego()" id="btnGameOver" ></a>
+                <a title="Fin del Juego" onclick="finJuego()" id="btnGameOver"></a>
             </div>
 
         </div>
@@ -53,12 +53,31 @@
         <br/>
         <!---->Fichas Blancas: <input type="text" id="contBlancas" disabled/>
     </form>
-
-    </form>
-    <!-- <label id="fnegras"> fichas negras <input type="text" name="Negras" id="cuentaNegras"/></label> -->
     <footer class="bg-dark">
         &copy; Juego Othello 2018
     </footer>
+
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCRQ51GF8dwOYdjrTgTndhQliiOCNvK4SY",
+            authDomain: "testjuego-221814.firebaseapp.com",
+            databaseURL: "https://testjuego-221814.firebaseio.com",
+            projectId: "testjuego-221814",
+            storageBucket: "testjuego-221814.appspot.com",
+            messagingSenderId: "613957137612"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="js/othelloapp.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
