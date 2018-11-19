@@ -1,3 +1,6 @@
+import othelloapp from "./othelloapp";
+var punteo = othelloapp.puntajeGanador;
+
 var btnSesion = document.getElementById('btnSesion');
 var btnLogout = document.getElementById('btnLogout');
 var txtDisplayName = document.getElementById('txtDisplayName');
@@ -51,7 +54,7 @@ btnLogout.addEventListener('click', function() {
         alert('Cerraste sesión');
     });
 });
-
+        
 btnSave.addEventListener('click', function(event) {
     event.preventDefault();
     var usuario = {
