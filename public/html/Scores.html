@@ -1,33 +1,34 @@
-<!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Juego de othello</title>
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" media="screen" href="./css/main.css">
+    <title>Scores</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="../css/Rules.css">
 </head>
 
-<body background="backgroundrules.jpg">
+<body background="../backgroundrules.jpg">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Juego Othello</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="../index.html">Juego Othello</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="html/Reglas.html">Reglas  </a>
+                    <a class="nav-link" href="Reglas.html">Reglas </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="html/acercaDe.html">¿Quiénes somos?</a>
+                    <a class="nav-link" href="acercaDe.html">¿Quiénes somos?</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://es.wikipedia.org/wiki/Reversi">Mas sobre Othello...</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="html/Scores.html">Puntuaciones</a>
+                    <a class="nav-link" href="Scores.html">Puntuaciones</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -36,30 +37,23 @@
             </form>
         </div>
     </nav>
-    <canvas id="tablero" width="500" height="500" class="tablero"></canvas>
-    <div class="main">
-        <div class="button-row">
-            <div>
-                <a title="Nuevo Juego" onclick="nuevoJuego()"></a>
-            </div>
-            <div>
-                <a title="Pasar" onclick="pasar()"></a>
-            </div>
-            <div>
-                <a title="Fin del Juego" onclick="finJuego()" id="btnGameOver"></a>
-            </div>
-
-        </div>
+    <div>
+        <h1></h1>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Puntación</th>
+                </tr>
+            </thead>
+            <tbody id="tblBody">
+                
+            </tbody>
+        </table>
     </div>
-    <form class="contador">
-        Fichas Negras: <input type="text" id="contNegras" disabled/>
-        <br/>
-        Fichas Blancas: <input type="text" id="contBlancas" disabled/>
-    </form>
     <footer class="bg-dark">
         &copy; Juego Othello 2018
     </footer>
-
 
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
@@ -81,7 +75,7 @@
         };
         firebase.initializeApp(config);
     </script>
-    <script src="js/othelloapp.js"></script>
+    <script src="js/scores.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

@@ -469,12 +469,16 @@ function iniciar(punteo) {
         refDB.child(usuario.uid).update(usuario);
         refDB.child(usuario.uid).child(n + '(' + punteo + ')').update({ score: { puntuacion: punteo, fecha: n } });
     });
-    setTimeout(cerrarSesion(), 1000);
+    setTimeout(cerrarSesion(), 4000);
 }
 
 function cerrarSesion() {
     firebase.auth().signOut().then(function() {
         console.log('Se cerró la sesión correctamente.');
     });
-    // setTimeout(location.reload(), 1500);
+    // setTimeout(location.reload(), 5000);
+}
+
+function score() {
+    location.href = "../html/Scores.html";
 }
